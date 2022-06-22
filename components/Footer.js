@@ -5,7 +5,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div className="footer">
-      <h4>Connect</h4>
+      <h3>Connect With Me</h3>
       <div className="nav-links">
         <Link href="/">
           <a>

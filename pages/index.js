@@ -23,6 +23,10 @@ export default function Home() {
           Let's Talk
         </button>
       </div>
+
+      <div className="container">
+        <h2>Projects</h2>
+      </div>
     </>
   );
 }
