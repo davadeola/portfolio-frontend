@@ -5,6 +5,18 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+h1 {
+  font-size: 60px;
+}
+
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 20px;
+  font-weight: 900;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -12,4 +24,66 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em;
+}
+
+.accent {
+  color: #02eaff;
+}
+
+.navbar img {
+  border-radius: 50%;
+}
+
+.nav-links {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.container {
+  padding: 0 1.5em 5em 1.5em;
+}
+
+.btn {
+  background-color: #fff;
+  padding: 3.5px;
+  border: none;
+  border-bottom: 2.5px solid;
+  border-color: #02eaff;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: border-color 0.15s ease-in;
+}
+
+.btn:hover {
+  border-color: #000;
+}
+
+.hero {
+  text-align: center;
+}
+
+.hero h1 {
+  line-height: 0.75em;
+}
+
+.footer {
+  background-color: #02eaff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 15em;
+  justify-content: center;
+  padding: 0 1.5em 1.5em 1.5em;
 }

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import "../styles/globals.css";
-import { Navbar } from "../components";
+import { Navbar, Footer } from "../components";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,12 +9,13 @@ function MyApp({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap"
           rel="stylesheet"
-        ></link>
+        />
       </Head>
       <Navbar />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 }
