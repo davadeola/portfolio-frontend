@@ -39,6 +39,10 @@ h4 {
   font-weight: 300;
 }
 
+h5 {
+  font-weight: 400;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -64,7 +68,7 @@ small {
   padding: 0.5em 5em 0.5em 5em;
   background-color: #fff;
   width: 100%;
-  /* position: fixed; */
+  position: fixed;
   z-index: 1;
 }
 
@@ -218,10 +222,13 @@ textarea {
 
 .workCard {
   display: flex;
-  align-items: flex-end;
-  min-height: 50vw;
-  min-width: 70vw;
-  padding: 5em;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 16px;
+  height: 30rem;
+  min-width: 30em;
+  padding: 2.5em;
   background-repeat: no-repeat;
   background: linear-gradient(11.77deg, #252525 7.74%, rgba(0, 0, 0, 0) 97.93%),
     url(../public/assets/images/project.png);
@@ -229,14 +236,29 @@ textarea {
   background-size: cover;
 }
 
+.workCard > div {
+  display: flex;
+  gap: 8px;
+}
+
 .work-row {
   display: flex;
   margin-top: 1em;
   margin-bottom: 2em;
-  position: sticky;
-  overflow-x: hidden;
+
   padding-top: 0.5em;
-  padding-right: 10em;
+
   top: 0;
-  gap: 8px;
+  gap: 16px;
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  width: 7.5em;
+  height: 2em;
+  border: 1px solid #02c7d9;
+  border-radius: 16px;
 }

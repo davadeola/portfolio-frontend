@@ -5,74 +5,7 @@ import { ServiceContent, WorkCard } from "../components";
 import HeaderTag from "../components/HeaderTag";
 //import { useIsInViewPort } from "../customHooks/useInViewPort";
 
-function useIsInViewPort(ref) {
-  const [isIntersecting, setIsIntersecting] = useState(true);
-
-  const observer = useRef(null);
-
-  useEffect(() => {
-    if (observer.current) observer.current.disconnect();
-
-    observer.current = new IntersectionObserver(([entry]) =>
-      setIsIntersecting(entry.isIntersecting)
-    );
-
-    const { current: currentObserver } = observer;
-
-    currentObserver.observe(ref.current);
-
-    return () => {
-      currentObserver.disconnect();
-    };
-  }, [ref]);
-
-  return isIntersecting;
-}
-
 export default function Home() {
-  const scrollRef = useRef();
-  const stickyRef = useRef();
-  const [stickyContainerHeight, setStickyContainerHeight] = useState(0);
-
-  let isInViewPort = useIsInViewPort(stickyRef);
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    const stickyContainer = stickyRef.current;
-
-    setStickyContainerHeight(scrollContainer.scrollWidth);
-
-    // console.log(isInViewPort);
-
-    const handleScroll = (e) => {
-      //e.preventDefault();
-
-      if (isInViewPort) {
-        var isPlaceHolderBelowTop =
-          stickyContainer.offsetTop < document.documentElement.scrollTop;
-
-        var isPlaceHolderBelowBottom =
-          stickyContainer.offsetTop + stickyContainer.offsetHeight >
-          document.documentElement.scrollTop;
-
-        var _canScrollHorizontally =
-          isPlaceHolderBelowBottom && isPlaceHolderBelowTop;
-
-        // console.log(_canScrollHorizontally);
-
-        if (_canScrollHorizontally) {
-          scrollContainer.scrollLeft += e.deltaY;
-        }
-      }
-    };
-
-    window.addEventListener("wheel", handleScroll);
-
-    return () => {
-      window.removeEventListener("wheel", handleScroll);
-    };
-  }, []);
-
   return (
     <>
       <Head>
@@ -107,18 +40,12 @@ export default function Home() {
 
       <div className="container">
         <HeaderTag title="Featured Works" />
-        <div
-          className="main"
-          ref={stickyRef}
-          style={{
-            height: stickyContainerHeight,
-          }}
-        >
-          <div className="work-row" ref={scrollRef}>
-            <WorkCard />
-            <WorkCard />
-            <WorkCard />
-          </div>
+
+        <div className="row work-row">
+          <WorkCard />
+          <WorkCard />
+          <WorkCard />
+          <WorkCard />
         </div>
       </div>
       <div className="container">
