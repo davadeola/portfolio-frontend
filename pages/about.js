@@ -4,32 +4,25 @@ import Image from "next/image";
 const about = () => {
   return (
     <>
-      <div className="container">
+      <div className="container hero">
         <div className="row">
           <div className="column">
-            <h2>About Me</h2>
-            <p>
-              Hi, my name is David Adeola. I am a passionate creative who loves
-              giving modern solutions to real-world problems. My love for the
-              simple things in life has inspired my philosophy of using the most
-              basic shapes and ideas to conquer the most complex challenges.
+            <h1>Who is David Adeola?</h1>
+            <p style={{ padding: "3em 15em 1em 0em", fontWeight: "300" }}>
+              My love for the simple things in life has inspired my philosophy
+              of using the most basic shapes and ideas to conquer the most
+              complex challenges.
               <br /> <br />
-              As a result,I fell in love with UI/UX design as I am able to
+              As a result, I fell in love with UI/UX design as I am able to
               express my creativity as well as my problem-solving skills to
               build accessible and enjoyable products and experiences. You’re
               welcome to explore my portfolio to view samples of my work.
               <br />
               <br />
-              Moreover, I enjoy karaoke, video games, and reading. I am
-              currently residing in Nairobi, Kenya as a student pursuing my
-              Bachelor’s Degree in Computer Science and Informatics.
+              For fun, I enjoy karaoke, video games, and reading books and
+              articles
             </p>
-            <button className="btn">Get Resume</button>
-          </div>
-          <div className="column">
-            <div className="image-container">
-              <Image src="/assets/images/david.png" height={400} width={400} />
-            </div>
+            <button className="btn btn-primary">Get Resume</button>
           </div>
         </div>
       </div>
