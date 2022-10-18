@@ -8,7 +8,7 @@ html {
   background-image: url("../public/assets/images/bg-rectangle.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: cover;
+  background-size: cover;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -229,16 +229,17 @@ textarea {
   height: 30rem;
   min-width: 30em;
   padding: 2.5em;
-  background-repeat: no-repeat;
+
   background: linear-gradient(11.77deg, #252525 7.74%, rgba(0, 0, 0, 0) 97.93%),
     url(../public/assets/images/project.png);
   border-radius: 36px;
-  background-size: cover;
 }
 
-.workCard > div {
+.tag-row {
   display: flex;
   gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .work-row {
@@ -257,7 +258,7 @@ textarea {
   justify-content: center;
   align-items: center;
   padding: 8px 16px;
-  width: 7.5em;
+  width: 8em;
   height: 2em;
   border: 1px solid #02c7d9;
   border-radius: 16px;

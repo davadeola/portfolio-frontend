@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {},
+
   reactStrictMode: true,
   images: {
     loader: "default",

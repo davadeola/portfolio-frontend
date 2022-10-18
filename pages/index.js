@@ -3,9 +3,10 @@ import Image from "next/image";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { ServiceContent, WorkCard } from "../components";
 import HeaderTag from "../components/HeaderTag";
+import { fetchAPI } from "../lib/api";
 //import { useIsInViewPort } from "../customHooks/useInViewPort";
 
-export default function Home() {
+function Home({ projects }) {
   return (
     <>
       <Head>
@@ -31,9 +32,9 @@ export default function Home() {
             </h4>
           </div>
           <div className="column">
-            <div className="box box1"></div>
-            <div className="box box2"></div>
-            <div className="box box3"></div>
+            <div className="box box1" />
+            <div className="box box2" />
+            <div className="box box3" />
           </div>
         </div>
       </div>
@@ -42,10 +43,9 @@ export default function Home() {
         <HeaderTag title="Featured Works" />
 
         <div className="row work-row">
-          <WorkCard />
-          <WorkCard />
-          <WorkCard />
-          <WorkCard />
+          {projects.map((project, id) => (
+            <WorkCard project={project} key={id} />
+          ))}
         </div>
       </div>
       <div className="container">
@@ -60,3 +60,17 @@ export default function Home() {
     </>
   );
 }
+
+export async function getStaticProps() {
+  const projectRes = await fetchAPI("/projects", {
+    populate: ["backgroundImage, tags"],
+  });
+
+  return {
+    props: {
+      projects: projectRes.data,
+    },
+  };
+}
+
+export default Home;

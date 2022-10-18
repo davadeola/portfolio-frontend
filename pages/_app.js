@@ -1,8 +1,15 @@
 import Head from "next/head";
+import App from "next/app";
 import "../styles/globals.css";
+import { createContext } from "react";
+import { fetchAPI } from "../lib/api";
 import { Navbar, Footer } from "../components";
 
+export const GlobalContext = createContext({});
+
 function MyApp({ Component, pageProps }) {
+  const { global } = pageProps;
+
   return (
     <>
       <Head>
@@ -15,10 +22,27 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <Navbar />
-      <Component {...pageProps} />
+      <GlobalContext.Provider value={global.attributes}>
+        <Component {...pageProps} />
+      </GlobalContext.Provider>
       <Footer />
     </>
   );
 }
+
+MyApp.getInitialProps = async (ctx) => {
+  const appProps = await App.getInitialProps(ctx);
+
+  const globalRes = await fetchAPI("/projects", {
+    populate: {
+      favicon: "*",
+      defaultSeo: {
+        populate: "*",
+      },
+    },
+  });
+
+  return { ...appProps, pageProps: { global: globalRes.data } };
+};
 
 export default MyApp;

@@ -1,19 +1,32 @@
 import React from "react";
-import Tag from "./Tag";
 
-function WorkCard() {
+import Tag from "./Tag";
+import { getStrapiMedia } from "../lib/media";
+import Link from "next/link";
+
+function WorkCard({ project }) {
   return (
-    <div className="workCard">
-      <h3 style={{ fontWeight: "bolder" }}>Mediaid</h3>
-      <h4>
-        Telemedicine Application for booking and consulting health providers
-      </h4>
-      <div className="">
-        <Tag tag="UI Design" />
-        <Tag tag="UX Design" />
-        <Tag tag="Development" />
-      </div>
-    </div>
+    <Link href={`/work/${project.attributes.slug}`}>
+      <a>
+        <div
+          className="workCard"
+          style={{
+            background: `linear-gradient(11.77deg, #252525 7.74%, rgba(0, 0, 0, 0) 97.93%),
+    url(${getStrapiMedia(project.attributes.backgroundImage)})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <h3 style={{ fontWeight: "bolder" }}>{project.attributes.title}</h3>
+          <h4>{project.attributes.description}</h4>
+          <div className="tag-row">
+            {project.attributes.tags.map((tag, i) => (
+              <Tag tag={tag.tag} key={i} />
+            ))}
+          </div>
+        </div>
+      </a>
+    </Link>
   );
 }
 
