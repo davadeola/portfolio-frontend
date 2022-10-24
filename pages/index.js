@@ -1,12 +1,23 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useRef, useLayoutEffect } from "react";
 import { ServiceContent, WorkCard } from "../components";
 import HeaderTag from "../components/HeaderTag";
 import { fetchAPI } from "../lib/api";
+import { gsap } from "gsap";
 //import { useIsInViewPort } from "../customHooks/useInViewPort";
 
 function Home({ projects }) {
+  const svgRef = useRef();
+
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      gsap.to(".turbulence", 3, { attr: { baseFrequency: "0 0" } });
+    }, svgRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <Head>
@@ -34,7 +45,38 @@ function Home({ projects }) {
           <div className="column">
             <div className="box box1" />
             <div className="box box2" />
-            <div className="box box3" />
+            <svg ref={svgRef}>
+              <filter id="noise" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence
+                  baseFrequency="0.02 0.05"
+                  result="NOISE"
+                  numOctaves="1"
+                  className="turbulence"
+                />
+                <feDisplacementMap
+                  in="SourceGraphic"
+                  in2="NOISE"
+                  scale="20"
+                ></feDisplacementMap>
+              </filter>
+            </svg>
+
+            <img
+              height="400"
+              src="/assets/images/david.png"
+              width="400"
+              className="davidImage"
+              style={{
+                height: "20em",
+                width: "20em",
+                borderRadius: "500px",
+                position: "absolute",
+                top: "5%",
+                left: "25%",
+                transform: "rotate(3.2deg)",
+                filter: "url(#noise)",
+              }}
+            />
           </div>
         </div>
       </div>

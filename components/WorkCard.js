@@ -12,7 +12,7 @@ function WorkCard({ project }) {
           className="workCard"
           style={{
             background: `linear-gradient(11.77deg, #252525 7.74%, rgba(0, 0, 0, 0) 97.93%),
-    url(${getStrapiMedia(project.attributes.backgroundImage)})`,
+    url(${getStrapiMedia(project.attributes.backgroundImage.data)})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

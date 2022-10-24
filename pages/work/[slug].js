@@ -1,39 +1,48 @@
 import React from "react";
-import { HeaderTag } from "../../components";
+import { HeaderTag, NextImage } from "../../components";
 import Tag from "../../components/Tag";
 import { fetchAPI } from "../../lib/api";
+import { getStrapiMedia } from "../../lib/media";
+import Image from "next/image";
+import Link from "next/link";
 
 const Work = ({ work }) => {
   const {
     title,
     role,
-    description,
+
     solution,
     problem,
-    caselink,
+    caseLink,
     timeCompleted,
+    tags,
+    mockup_prototype,
   } = work.attributes;
 
   return (
     <div>
       <div className="container">
         <div className="row" style={{ wordBreak: "break-word" }}>
-          <div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexWrap: "wrap",
-                gap: "24px",
-              }}
-            >
-              <h1>{title}</h1>
-              <button className="btn btn-primary">Read Case Study</button>
-            </div>
-            <p>{timeCompleted}</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "24px",
+            }}
+          >
+            <h1>{title}</h1>
           </div>
           <div className="tag-row">
-            {work.attributes.tags.map((tag, i) => (
+            <Link href={caseLink}>
+              <button className="btn btn-primary">Read Case Study</button>
+            </Link>
+          </div>
+        </div>
+        <div className="row">
+          <p>{timeCompleted}</p>
+          <div className="tag-row">
+            {tags.map((tag, i) => (
               <Tag tag={tag.tag} key={i} />
             ))}
           </div>
@@ -57,7 +66,9 @@ const Work = ({ work }) => {
                 <p>{role}</p>
               </div>
             </div>
-            <div>ssss</div>
+            <div>
+              <NextImage image={mockup_prototype} />
+            </div>
           </div>
 
           <div className="row"></div>

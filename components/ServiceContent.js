@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function ServiceContent({ title, desc }) {
-  const [open, isOpen] = useState(false);
+  const [open, isOpen] = useState(true);
 
   return (
     <div style={{ padding: "2.5em 5em 0 5em" }}>

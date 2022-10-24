@@ -22,7 +22,7 @@ h5 {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 4rem;
 }
 
 h2 {
@@ -142,8 +142,14 @@ small {
 
 .btn:hover {
   border-color: #fff;
+  background-color: #252525;
   color: #02c7d9;
-  background-color: inherit;
+}
+
+.btn-primary:hover {
+  background-color: #00adbd;
+  border-color: #00adbd;
+  color: #252525;
 }
 
 .footer {
