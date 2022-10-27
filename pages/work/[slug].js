@@ -4,7 +4,9 @@ import Tag from "../../components/Tag";
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 import Image from "next/image";
+import { animate, motion } from "framer-motion";
 import Link from "next/link";
+import withTransition from "../../lib/withTransition";
 
 const Work = ({ work }) => {
   const {
@@ -19,39 +21,83 @@ const Work = ({ work }) => {
     mockup_prototype,
   } = work.attributes;
 
+  const content = {
+    animate: {
+      transition: { staggerChildren: 0.2, delayChildren: 1.5 },
+    },
+  };
+
+  const titleFade = {
+    initial: {
+      y: 20,
+      opacity: 0,
+    },
+
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.7,
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
+  };
+
   return (
-    <div>
-      <div className="container">
-        <div className="row" style={{ wordBreak: "break-word" }}>
+    <motion.div exit={{ opacity: 0 }}>
+      <motion.div
+        className="container"
+        animate="animate"
+        initial="initial"
+        variants={content}
+      >
+        <motion.div
+          className="row"
+          style={{ wordBreak: "break-word" }}
+          variants={titleFade}
+        >
           <div
             style={{
+              paddingTop: "2em",
+              paddingBottom: "2em",
               display: "flex",
               alignItems: "center",
               flexWrap: "wrap",
               gap: "24px",
             }}
           >
-            <h1>{title}</h1>
+            <h2>{title}</h2>
           </div>
-          <div className="tag-row">
+        </motion.div>
+        <motion.div
+          style={{ display: "flex", justifyContent: "space-between" }}
+          variants={titleFade}
+        >
+          <div>
             <Link href={caseLink}>
               <button className="btn btn-primary">Read Case Study</button>
             </Link>
           </div>
-        </div>
-        <div className="row">
-          <p>{timeCompleted}</p>
+
           <div className="tag-row">
             {tags.map((tag, i) => (
               <Tag tag={tag.tag} key={i} />
             ))}
           </div>
-        </div>
+
+          <p>{timeCompleted}</p>
+        </motion.div>
 
         <div style={{ marginTop: "64px" }}>
           <div className="row">
-            <div
-              style={{ display: "flex", gap: "64px", flexDirection: "column" }}
+            <motion.div
+              style={{
+                display: "flex",
+                gap: "64px",
+                flexDirection: "column",
+                paddingRight: "5rem",
+              }}
+              variants={titleFade}
             >
               <div>
                 <HeaderTag title="The Problem" />
@@ -65,16 +111,16 @@ const Work = ({ work }) => {
                 <HeaderTag title="My Role" />
                 <p>{role}</p>
               </div>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div variants={titleFade}>
               <NextImage image={mockup_prototype} />
-            </div>
+            </motion.div>
           </div>
 
           <div className="row"></div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

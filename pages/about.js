@@ -1,10 +1,64 @@
-import React from "react";
-import Image from "next/image";
+import React, { useLayoutEffect, useRef } from "react";
+import { useAnimation, motion } from "framer-motion";
+import withTransition from "../lib/withTransition";
+import { useIsInViewPort } from "../customHooks/useInViewPort";
 
 const about = () => {
+  const cvRef = useRef(null);
+
+  const controls = useAnimation();
+  const isInView = useIsInViewPort(cvRef);
+
+  useLayoutEffect(() => {
+    if (isInView) {
+      controls.start("animate");
+    }
+  }, [controls, isInView]);
+
+  const titleFade = {
+    initial: {
+      y: 20,
+      opacity: 0,
+    },
+
+    animate: {
+      y: 0,
+      opacity: 1,
+
+      transition: {
+        duration: 1,
+        delay: 1.8,
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
+  };
+
+  const cvFade = {
+    initial: {
+      y: 20,
+      opacity: 0,
+    },
+
+    animate: {
+      y: 0,
+      opacity: 1,
+
+      transition: {
+        duration: 1,
+
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
+  };
+
   return (
-    <>
-      <div className="container hero">
+    <motion.div exit={{ opacity: 0 }}>
+      <motion.div
+        className="container hero"
+        initial="initial"
+        animate="animate"
+        variants={titleFade}
+      >
         <div className="row">
           <div className="column">
             <h1>Who is David Adeola?</h1>
@@ -25,9 +79,15 @@ const about = () => {
             <button className="btn btn-primary">Get Resume</button>
           </div>
         </div>
-      </div>
+      </motion.div>
       <div className="container">
-        <div className="row">
+        <motion.div
+          className="row"
+          initial="initial"
+          variants={cvFade}
+          animate={controls}
+          ref={cvRef}
+        >
           <div className="column">
             <h3>Education</h3>
             <div className="about-entry">
@@ -86,10 +146,10 @@ const about = () => {
               <p>English, Kiswahili, French</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </>
+    </motion.div>
   );
 };
 
-export default about;
+export default withTransition(about);

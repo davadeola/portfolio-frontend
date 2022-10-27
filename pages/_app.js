@@ -4,10 +4,11 @@ import "../styles/globals.css";
 import { createContext } from "react";
 import { fetchAPI } from "../lib/api";
 import { Navbar, Footer } from "../components";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const GlobalContext = createContext({});
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   const { global } = pageProps;
 
   return (
@@ -21,11 +22,16 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <Navbar />
-      <GlobalContext.Provider value={global.attributes}>
-        <Component {...pageProps} />
-      </GlobalContext.Provider>
-      <Footer />
+      <AnimatePresence exitBeforeEnter>
+        <>
+          <Navbar />
+          <GlobalContext.Provider value={global.attributes}>
+            <Component {...pageProps} key={router.route} />
+          </GlobalContext.Provider>
+
+          <Footer />
+        </>
+      </AnimatePresence>
     </>
   );
 }

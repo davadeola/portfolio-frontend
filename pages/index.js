@@ -4,19 +4,59 @@ import { useRef, useLayoutEffect } from "react";
 import { ServiceContent, WorkCard } from "../components";
 import HeaderTag from "../components/HeaderTag";
 import { fetchAPI } from "../lib/api";
-import { gsap } from "gsap";
-//import { useIsInViewPort } from "../customHooks/useInViewPort";
+import { useAnimation, motion } from "framer-motion";
+import withTransition from "../lib/withTransition";
+import { useIsInViewPort } from "../customHooks/useInViewPort";
 
 function Home({ projects }) {
-  const svgRef = useRef();
+  const workRef = useRef();
+  const serviceRef = useRef();
+  const isWorkInView = useIsInViewPort(workRef);
+  const isServiceInView = useIsInViewPort(serviceRef);
+  const workControls = useAnimation();
+  const serviceControls = useAnimation();
+
+  const workContent = {
+    animate: {
+      transition: { staggerChildren: 0.5, delayChildren: 0.5 },
+    },
+  };
+
+  const serviceContent = {
+    animate: {
+      transition: { staggerChildren: 0.5, delayChildren: 1 },
+    },
+  };
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.to(".turbulence", 3, { attr: { baseFrequency: "0 0" } });
-    }, svgRef);
+    if (isWorkInView) {
+      workControls.start("animate");
+    }
+  }, [workControls, isWorkInView]);
 
-    return () => ctx.revert();
-  }, []);
+  useLayoutEffect(() => {
+    if (isServiceInView) {
+      serviceControls.start("animate");
+    }
+  }, [serviceControls, isServiceInView]);
+
+  const titleHomeFade = {
+    initial: {
+      y: 30,
+      opacity: 0,
+    },
+
+    animate: {
+      y: 0,
+      opacity: 1,
+
+      transition: {
+        duration: 1,
+        delay: 1.8,
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
+  };
 
   return (
     <>
@@ -29,8 +69,13 @@ function Home({ projects }) {
         <link rel="icon" href="assets/images/logo.png" />
       </Head>
 
-      <div className="container hero">
-        <div className="row">
+      <motion.div className="container hero" exit={{ opacity: 0 }}>
+        <motion.div
+          className="row"
+          initial="initial"
+          animate="animate"
+          variants={titleHomeFade}
+        >
           <div className="column">
             <h3>My name is David Adeola. I am a</h3>
             <h1>
@@ -45,65 +90,54 @@ function Home({ projects }) {
           <div className="column">
             <div className="box box1" />
             <div className="box box2" />
-            <svg ref={svgRef}>
-              <filter id="noise" x="0%" y="0%" width="100%" height="100%">
-                <feTurbulence
-                  baseFrequency="0.02 0.05"
-                  result="NOISE"
-                  numOctaves="1"
-                  className="turbulence"
-                />
-                <feDisplacementMap
-                  in="SourceGraphic"
-                  in2="NOISE"
-                  scale="20"
-                ></feDisplacementMap>
-              </filter>
-            </svg>
 
-            <img
-              height="400"
-              src="/assets/images/david.png"
-              width="400"
-              className="davidImage"
-              style={{
-                height: "20em",
-                width: "20em",
-                borderRadius: "500px",
-                position: "absolute",
-                top: "5%",
-                left: "25%",
-                transform: "rotate(3.2deg)",
-                filter: "url(#noise)",
-              }}
-            />
+            <div className="box box3"></div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="container">
+      <motion.div className="container" id="work">
         <HeaderTag title="Featured Works" />
 
-        <div className="row work-row">
+        <motion.div
+          className="row work-row"
+          animate={workControls}
+          initial="initial"
+          ref={workRef}
+          variants={workContent}
+        >
           {projects.map((project, id) => (
             <WorkCard project={project} key={id} />
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       <div className="container">
         <HeaderTag title="I Offer..." />
-        <ServiceContent
-          title="Web and Mobile Application Interface Design"
-          desc="Utilizing Figma, Adobe XD and Framer, I can create storyboards, draw wireframes, and design high fidelity prototypes to visualize your ideas"
-        />
-        <ServiceContent title="Application Development" />
-        <ServiceContent title="User Experience Design" />
+        <motion.div
+          animate={serviceControls}
+          initial="initial"
+          ref={serviceRef}
+          variants={serviceContent}
+        >
+          <ServiceContent
+            title="Web and Mobile Application Interface Design"
+            desc="Utilizing Figma, Adobe XD and Framer, we can create storyboards, draw wire-frames, and design high fidelity prototypes to visualize your ideas"
+          />
+          <ServiceContent
+            title="Application Development"
+            desc="I specialize in building web applications using the React Javascript framework whether you need an E-commerce site to boost your sales or a new brand page. In addition, we could use popular low code platforms such as Wix or Webflow to visualize your ideas and capitalize on the content management services"
+          />
+          <ServiceContent
+            title="User Experience Design"
+            desc="Plan and map your user journeys with us in order to create amazing experiences for them and increase your sales. We also offer user testing and project validation for small enterprises and startups"
+          />
+        </motion.div>
       </div>
     </>
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const projectRes = await fetchAPI("/projects", {
     populate: ["backgroundImage, tags"],
   });
@@ -113,6 +147,6 @@ export async function getStaticProps() {
       projects: projectRes.data,
     },
   };
-}
+};
 
-export default Home;
+export default withTransition(Home);
