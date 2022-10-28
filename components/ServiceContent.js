@@ -39,10 +39,7 @@ function ServiceContent({ title, desc }) {
   };
 
   return (
-    <motion.div
-      style={{ padding: "2.5em 5em 0 5em" }}
-      variants={indexContentFade}
-    >
+    <motion.div className="service-container" variants={indexContentFade}>
       <div
         className="row"
         onClick={() => setIsOpen(!isOpen)}

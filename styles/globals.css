@@ -1,8 +1,7 @@
-body,
-html {
+body {
   padding: 0;
   margin: 0;
-  width: 100%;
+  font-size: 16px;
   color: #fff;
   background-color: #252525;
   background-image: url("../public/assets/images/bg-rectangle.png");
@@ -32,7 +31,7 @@ h2 {
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 300;
 }
 
@@ -56,7 +55,7 @@ a {
 }
 
 p {
-  line-height: 24px;
+  line-height: 1.5rem;
 }
 
 small {
@@ -77,7 +76,7 @@ small {
   position: fixed;
   top: 0;
 
-  z-index: 1;
+  z-index: 2;
 }
 
 .accent {
@@ -115,10 +114,28 @@ small {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
+  height: auto;
+}
+
+.flex-justify {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  flex-direction: row-reverse;
 }
 
 .row > * {
   flex: 1 1 20em;
+}
+
+.column {
+  position: relative;
+
+  width: 100%;
+
+  height: auto;
 }
 
 .image-container {
@@ -179,37 +196,15 @@ small {
   margin-bottom: 2.5em;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5em;
-  padding: 0 25%;
-}
-
-.form-input {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-input > input,
-textarea {
-  flex-grow: 1;
-  max-width: 40rem;
-  padding: 1em;
-}
-
-.column {
-  position: relative;
-}
-
 .box {
   background-color: #fff;
   position: absolute;
   width: 20em;
   height: 20em;
+  display: block;
   border-radius: 36px;
-  top: 5%;
-  left: 25%;
+  top: 2em;
+  left: 10%;
   transform: rotate(-17.9deg);
 }
 
@@ -223,6 +218,7 @@ textarea {
   border-radius: 500px;
   background: url(../public/assets/images/david.png);
   background-size: cover;
+  z-index: 1;
 }
 
 .line {
@@ -242,7 +238,7 @@ textarea {
   justify-content: flex-end;
   gap: 16px;
   height: 30rem;
-  min-width: 30em;
+  min-width: 30rem;
   padding: 2.5em;
 
   background: linear-gradient(11.77deg, #252525 7.74%, rgba(0, 0, 0, 0) 97.93%),
@@ -253,6 +249,7 @@ textarea {
 .tag-row {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
 }
@@ -279,6 +276,10 @@ textarea {
   border-radius: 16px;
 }
 
+.service-container {
+  padding: 2.5em 5em 0 5em;
+}
+
 .slide-out {
   position: fixed;
 
@@ -290,4 +291,43 @@ textarea {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    font-size: 14px;
+  }
+
+  .navbar {
+    padding: 0.5em 1.5em 0.5em 1.5em;
+  }
+
+  .container {
+    padding: 0 1.5em 0 1em;
+    margin: 7.5em 0 10em 0;
+  }
+
+  /* .box {
+    display: none;
+  } */
+
+  .workCard {
+    min-width: 20rem;
+  }
+
+  .row > * {
+    flex: 1 1 100%;
+  }
+
+  .tag-row {
+    justify-content: flex-start;
+  }
+
+  .service-container {
+    padding: 1em 2em 0 1.5em;
+  }
+
+  .footer {
+    padding: 1.5em;
+  }
 }

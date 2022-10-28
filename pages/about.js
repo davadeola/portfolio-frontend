@@ -62,7 +62,7 @@ const about = () => {
         <div className="row">
           <div className="column">
             <h1>Who is David Adeola?</h1>
-            <p style={{ padding: "3em 15em 1em 0em", fontWeight: "300" }}>
+            <p style={{ padding: "1.5em 0em 2.5em 0em", fontWeight: "300" }}>
               My love for the simple things in life has inspired my philosophy
               of using the most basic shapes and ideas to conquer the most
               complex challenges.

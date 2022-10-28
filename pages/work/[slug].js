@@ -69,10 +69,7 @@ const Work = ({ work }) => {
             <h2>{title}</h2>
           </div>
         </motion.div>
-        <motion.div
-          style={{ display: "flex", justifyContent: "space-between" }}
-          variants={titleFade}
-        >
+        <motion.div className="flex-justify" variants={titleFade}>
           <div>
             <Link href={caseLink}>
               <button className="btn btn-primary">Read Case Study</button>
@@ -93,9 +90,8 @@ const Work = ({ work }) => {
             <motion.div
               style={{
                 display: "flex",
-                gap: "64px",
+                gap: "3.5rem",
                 flexDirection: "column",
-                paddingRight: "5rem",
               }}
               variants={titleFade}
             >

@@ -5,10 +5,22 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <div className="navbar">
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          justifyContent: "flex-start",
+        }}
+      >
         <Link href="/">
           <a>
-            <Image width={150} height={50} src="/assets/images/logo.svg" />
+            <Image
+              width={150}
+              height={50}
+              src="/assets/images/logo.svg"
+              layout="intrinsic"
+            />
           </a>
         </Link>
       </div>

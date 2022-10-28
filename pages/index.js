@@ -87,11 +87,10 @@ function Home({ projects }) {
               enjoyable experiences to solve real problems.
             </h4>
           </div>
-          <div className="column">
+          <div className="column" style={{ height: "20em" }}>
             <div className="box box1" />
             <div className="box box2" />
-
-            <div className="box box3"></div>
+            <div className="box box3" />
           </div>
         </motion.div>
       </motion.div>
